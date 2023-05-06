@@ -1,6 +1,6 @@
 ## Ecommerce Petshop API
 A Petshop API with all the main features of an ecommerce system
-- [ ] users
+- [x] users
 - [ ] orders
 - [ ] products
 - [ ] auth
