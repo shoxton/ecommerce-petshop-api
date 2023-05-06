@@ -36,4 +36,23 @@ class StoreUserTest extends TestCase
             'first_name' => 'John'
         ]);
     }
+
+    public function test_cannot_create_a_user_with_an_already_existing_email()
+    {
+
+        $johndoe = \App\Models\User::factory()->create(['email' => 'johndoe@example.com']);
+
+        $userData = [
+            "first_name" => "John",
+            "last_name" => "Doe",
+            "address" => "758 Gibson Stravenue Suite 866",
+            "phone_number" => "501.737.1571",
+            "email" => "johndoe@example.com",
+            'password' => 'johndoe1234',
+            "password_confirmation" => "johndoe1234",
+        ];
+
+        $response = $this->postJson(route('user.store'), $userData)
+            ->assertJsonValidationErrorFor('email');
+    }
 }
