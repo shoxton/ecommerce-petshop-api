@@ -3,12 +3,10 @@
 namespace Tests\Feature\Users;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class StoreUserTest extends TestCase
 {
-
     use RefreshDatabase;
 
     public function test_a_user_is_created_persisted_and_returns_jwt_token(): void

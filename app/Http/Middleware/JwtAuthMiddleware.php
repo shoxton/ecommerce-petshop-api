@@ -10,8 +10,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class JwtAuthMiddleware
 {
-
-
     private JWTService $jwtService;
 
     public function __construct(JWTService $jwtService)

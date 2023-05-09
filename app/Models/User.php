@@ -6,7 +6,6 @@ namespace App\Models;
 
 use App\Services\JWTService;
 use App\Traits\HasUuid;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -14,7 +13,10 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, HasUuid, Notifiable;
+    use HasApiTokens;
+    use HasFactory;
+    use HasUuid;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.

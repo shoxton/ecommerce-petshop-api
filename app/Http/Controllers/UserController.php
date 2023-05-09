@@ -9,7 +9,6 @@ use App\Http\Resources\UserWithTokenResource;
 use App\Models\User;
 use App\Services\JWTService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 /**
@@ -38,7 +37,6 @@ use Illuminate\Support\Facades\Hash;
  */
 class UserController extends Controller
 {
-
     /**
      * @OA\Post(
      *     path="/v1/user/create",

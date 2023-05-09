@@ -7,7 +7,6 @@ use Lcobucci\Clock\SystemClock;
 use Lcobucci\JWT\Configuration;
 use Lcobucci\JWT\Signer\Key;
 use Lcobucci\JWT\Token;
-use Lcobucci\JWT\Token\Builder;
 use Lcobucci\JWT\Validation\Constraint;
 
 class JWTService implements JWTContract
