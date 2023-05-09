@@ -2,18 +2,11 @@
 
 namespace Tests\Feature\Users;
 
-use App\Services\JWTService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Lcobucci\JWT\Builder;
-use Lcobucci\JWT\Configuration;
-use Lcobucci\JWT\Token;
-use Mockery;
 use Tests\TestCase;
 
 class LoginUserTest extends TestCase
 {
-
     use RefreshDatabase;
 
     public function test_user_login_returns_valid_token(): void
