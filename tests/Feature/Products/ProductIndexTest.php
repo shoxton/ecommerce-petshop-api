@@ -3,13 +3,11 @@
 namespace Tests\Feature\Products;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Response;
 use Tests\TestCase;
 
 class ProductIndexTest extends TestCase
 {
-
     use RefreshDatabase;
 
     public function test_unnauthenticated_user_cannot_fetch_products_list(): void
