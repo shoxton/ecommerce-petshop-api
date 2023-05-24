@@ -4,7 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-use App\Services\JWTService;
+use App\Services\JwtService;
 use App\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -55,7 +55,7 @@ class User extends Authenticatable
 
     public function token()
     {
-        return (new JWTService())->getToken($this->uuid);
+        return (new JwtService())->getToken($this->uuid);
     }
 
     public function getAuthIdentifierName()
