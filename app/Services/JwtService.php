@@ -9,7 +9,7 @@ use Lcobucci\JWT\Signer\Key;
 use Lcobucci\JWT\Token;
 use Lcobucci\JWT\Validation\Constraint;
 
-class JWTService implements JWTContract
+class JwtService implements JwtContract
 {
     private Configuration $config;
 
@@ -17,8 +17,8 @@ class JWTService implements JWTContract
     {
         $this->config = Configuration::forAsymmetricSigner(
             new \Lcobucci\JWT\Signer\Rsa\Sha256(),
-            Key\InMemory::plainText(file_get_contents(storage_path(config('services.jwt.private')))),
-            Key\InMemory::plainText(file_get_contents(storage_path(config('services.jwt.public'))))
+            Key\InMemory::plainText($this->getPrivateKey()),
+            Key\InMemory::plainText($this->getPublicKey())
         );
     }
 
@@ -33,6 +33,7 @@ class JWTService implements JWTContract
             ->withClaim('user_uuid', $uuid)
             ->issuedAt($now)
             ->expiresAt($now->modify('+1 day'))
+            ->canOnlyBeUsedAfter($now)
             ->getToken($this->config->signer(), $this->config->signingKey());
 
         return $token;
@@ -60,6 +61,7 @@ class JWTService implements JWTContract
         );
 
         $constraints = $this->config->validationConstraints();
+
         return $this->config->validator()->validate($token, ...$constraints);
     }
 
@@ -67,5 +69,15 @@ class JWTService implements JWTContract
     {
         $token = $this->parseToken($jwt);
         return $token->claims()->all();
+    }
+
+    protected function getPrivateKey(): string
+    {
+        return file_get_contents(config('jwt.private_key'));
+    }
+
+    protected function getPublicKey(): string
+    {
+        return file_get_contents(config('jwt.public_key'));
     }
 }
