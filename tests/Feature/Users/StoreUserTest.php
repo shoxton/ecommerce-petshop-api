@@ -35,7 +35,7 @@ class StoreUserTest extends TestCase
         ]);
     }
 
-    public function test_cannot_create_a_user_with_an_already_existing_email()
+    public function test_cannot_create_a_user_with_an_already_existing_email(): void
     {
 
         $johndoe = \App\Models\User::factory()->create(['email' => 'johndoe@example.com']);

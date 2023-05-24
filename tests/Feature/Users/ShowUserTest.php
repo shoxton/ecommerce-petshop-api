@@ -9,7 +9,7 @@ class ShowUserTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_it_can_get_user()
+    public function test_it_can_get_user(): void
     {
         $user = \App\Models\User::factory()->create([
             'email' => 'johndoe@example.com',

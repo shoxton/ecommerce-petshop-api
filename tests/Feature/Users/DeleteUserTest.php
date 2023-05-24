@@ -9,7 +9,7 @@ class DeleteUserTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_a_user_can_delete_its_account()
+    public function test_a_user_can_delete_its_account(): void
     {
 
         $this->withoutExceptionHandling();
