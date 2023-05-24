@@ -7,7 +7,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\UserWithTokenResource;
 use App\Models\User;
-use App\Services\JWTService;
+use App\Services\JwtService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -89,7 +89,7 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $request->merge([
-            'password' => bcrypt($request->input('password'))
+            'password' => Hash::make($request->input('password'))
         ]);
 
         $user = User::create($request->input());
@@ -138,9 +138,7 @@ class UserController extends Controller
      */
     public function show(Request $request)
     {
-        $user = $request->attributes->get('user');
-
-        return new UserResource($user);
+        return new UserResource($request->user());
     }
 
     /**
@@ -183,7 +181,7 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request)
     {
-        $user = $request->attributes->get('user');
+        $user = $request->user();
 
         $user->update($request->input());
 
@@ -214,9 +212,7 @@ class UserController extends Controller
      */
     public function destroy(Request $request)
     {
-        $user = $request->attributes->get('user');
-
-        $user->delete();
+        $request->user()->delete();
 
         return response()->json()->status(200);
     }
@@ -252,7 +248,7 @@ class UserController extends Controller
      *     )
      * )
      */
-    public function login(Request $request, JWTService $jwtService)
+    public function login(Request $request, JwtService $jwtService)
     {
 
         $user = User::where('email', $request->input('email'))->first();
