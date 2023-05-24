@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,4 +33,7 @@ Route::prefix('v1')->group(function () {
 
         Route::get('orders', [])->name('orders')->middleware('auth:jwt');
     });
+
+
+    Route::apiResource('product', ProductController::class)->middleware('auth:jwt');
 });
