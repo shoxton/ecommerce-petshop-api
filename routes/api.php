@@ -35,5 +35,5 @@ Route::prefix('v1')->group(function () {
     });
 
 
-    Route::apiResource('product', ProductController::class)->middleware('auth:jwt');
+    Route::apiResource('product', ProductController::class);
 });
