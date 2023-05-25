@@ -7,7 +7,6 @@ use Tests\TestCase;
 
 class ProductTest extends TestCase
 {
-
     use RefreshDatabase;
 
     public function test_uuid_is_automatically_filled(): void
