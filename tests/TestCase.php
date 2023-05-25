@@ -14,4 +14,11 @@ abstract class TestCase extends BaseTestCase
 
         return $this->actingAs($user, 'jwt');
     }
+
+    public function actingAsJwtAdmin()
+    {
+        $admin = \App\Models\User::factory()->admin()->create();
+
+        return $this->actingAs($admin, 'jwt');
+    }
 }
