@@ -3,12 +3,10 @@
 namespace Tests\Feature\Products;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ProductShowTest extends TestCase
 {
-
     use RefreshDatabase;
 
     public function test_product_show_route_can_fetch_product_by_uuid(): void

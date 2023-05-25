@@ -8,7 +8,6 @@ use Illuminate\Http\Response;
 
 class ProductController extends Controller
 {
-
     /**
      * Instantiate a new controller instance.
      */
