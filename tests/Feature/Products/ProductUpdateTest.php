@@ -56,4 +56,38 @@ class ProductUpdateTest extends TestCase
         ])->assertSuccessful();
 
     }
+
+    public function test_admin_user_can_update_product_passing_valid_jwt(): void
+    {
+
+        $admin = \App\Models\User::factory()->admin()->create([
+            'email' => 'johndoe@example.com',
+            'first_name' => 'John',
+            'last_name' => 'Doe'
+        ]);
+
+        $response = $this->postJson(route('user.login'), [
+            'email' => 'johndoe@example.com',
+            'password' => 'password'
+        ])->assertJsonStructure(['token']);
+
+        $jwt = $response->json('token');
+
+        $product = \App\Models\Product::factory()->create(['title' => 'Product title']);
+
+        $this->assertDatabaseHas('products', [
+            'title' => 'Product title'
+        ]);
+
+        $this->putJson(route('product.update', [$product]), [
+            'title' => 'Updated product title'
+        ], [
+            'Authorization' => 'Bearer ' . $jwt
+        ])->assertSuccessful();
+
+        $this->assertDatabaseHas('products', [
+            'title' => 'Updated product title'
+        ]);
+
+    }
 }

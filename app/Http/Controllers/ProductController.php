@@ -13,8 +13,8 @@ class ProductController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->only(['store', 'update', 'destroy']);
-        $this->middleware('admin')->only(['store', 'update', 'destroy']);
+        $this->middleware('auth:jwt')->except(['index', 'show']);
+        $this->middleware('admin')->except(['index', 'show']);
     }
 
     /**

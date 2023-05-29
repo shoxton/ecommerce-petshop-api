@@ -15,7 +15,7 @@ class ProductDeleteTest extends TestCase
 
         $product = \App\Models\Product::factory()->create(['title' => 'Product to be deleted']);
 
-        $this->deleteJson(route('product.destroy', [$product]))
+        $this->actingAsJwtAdmin()->deleteJson(route('product.destroy', [$product]))
             ->assertStatus(Response::HTTP_NO_CONTENT);
 
         $this->assertDatabaseMissing('products', [
@@ -45,5 +45,29 @@ class ProductDeleteTest extends TestCase
             'uuid' => $product->uuid,
             'title' => 'Product to be deleted'
         ]);
+    }
+
+    public function test_admin_user_can_delete_product_passing_valid_jwt(): void
+    {
+
+        $user = \App\Models\User::factory()->admin()->create([
+            'email' => 'johndoe@example.com',
+            'first_name' => 'John',
+            'last_name' => 'Doe'
+        ]);
+
+        $response = $this->postJson(route('user.login'), [
+            'email' => 'johndoe@example.com',
+            'password' => 'password'
+        ])->assertJsonStructure(['token']);
+
+        $jwt = $response->json('token');
+
+        $product = \App\Models\Product::factory()->create();
+
+        $this->deleteJson(route('product.destroy', [$product]), [], [
+            'Authorization' => 'Bearer ' . $jwt
+        ])->assertSuccessful();
+
     }
 }
