@@ -45,7 +45,7 @@ class ProductStoreTest extends TestCase
         // test unauthorized users
         $this->actingAsJwtUser()
             ->postJson(route('product.store'), ['title' => 'Lorem ipsum'])
-            ->assertUnauthorized();
+            ->assertForbidden();
 
         // test admin users
         $this->actingAsJwtAdmin()

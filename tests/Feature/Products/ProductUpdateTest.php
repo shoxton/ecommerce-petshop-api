@@ -49,7 +49,7 @@ class ProductUpdateTest extends TestCase
 
         $this->actingAsJwtUser()->putJson(route('product.update', [$product]), [
             'title' => 'Product updated title'
-        ])->assertUnauthorized();
+        ])->assertForbidden();
 
         $this->actingAsJwtAdmin()->putJson(route('product.update', [$product]), [
             'title' => 'Product updated title'
