@@ -16,7 +16,7 @@ class EnsureUserIsAdminMiddleware
     public function handle(Request $request, Closure $next): Response
     {
 
-        if(!$request->user() || !$request->user()->is_admin) {
+        if(!$request->user()?->isAdmin()) {
             return response()->json(['message' => 'Unauthorized'], Response::HTTP_FORBIDDEN);
         }
 
