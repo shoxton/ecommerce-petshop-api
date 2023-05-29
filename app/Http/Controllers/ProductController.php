@@ -13,8 +13,8 @@ class ProductController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->only(['store', 'update']);
-        $this->middleware('admin')->only(['store', 'update']);
+        $this->middleware('auth')->only(['store', 'update', 'destroy']);
+        $this->middleware('admin')->only(['store', 'update', 'destroy']);
     }
 
     /**
@@ -64,8 +64,10 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Product $product)
     {
-        //
+        $product->delete();
+
+        return response()->json(['message' => 'Product deleted successfully.'], Response::HTTP_NO_CONTENT);
     }
 }
