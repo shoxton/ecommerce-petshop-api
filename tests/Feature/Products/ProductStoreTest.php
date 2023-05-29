@@ -52,4 +52,28 @@ class ProductStoreTest extends TestCase
             ->postJson(route('product.store'), ['title' => 'Lorem ipsum'])
             ->assertCreated();
     }
+
+    public function test_admin_user_can_store_product_passing_valid_jwt(): void
+    {
+
+        $admin = \App\Models\User::factory()->admin()->create([
+            'email' => 'johndoe@example.com',
+            'first_name' => 'John',
+            'last_name' => 'Doe'
+        ]);
+
+        $response = $this->postJson(route('user.login'), [
+            'email' => 'johndoe@example.com',
+            'password' => 'password'
+        ])->assertJsonStructure(['token']);
+
+        $jwt = $response->json('token');
+
+        $this->postJson(route('product.store'), [
+            'title' => 'Test product'
+        ], [
+            'Authorization' => 'Bearer ' . $jwt
+        ])->assertCreated();
+
+    }
 }
