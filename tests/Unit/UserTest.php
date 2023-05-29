@@ -27,4 +27,17 @@ class UserTest extends TestCase
         $this->assertNotNull($user->uuid);
 
     }
+
+    public function test_is_admin_helper_returns_valid_boolean(): void
+    {
+
+        $user = \App\Models\User::factory()->create();
+
+        $this->assertFalse($user->isAdmin());
+
+        $admin = \App\Models\User::factory()->admin()->create();
+
+        $this->assertTrue($admin->isAdmin());
+
+    }
 }
