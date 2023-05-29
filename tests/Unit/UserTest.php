@@ -25,6 +25,7 @@ class UserTest extends TestCase
         $user = \App\Models\User::factory()->create();
 
         $this->assertNotNull($user->uuid);
+        $this->assertIsString($user->uuid);
 
     }
 
