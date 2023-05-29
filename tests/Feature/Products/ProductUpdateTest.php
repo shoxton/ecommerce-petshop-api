@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Products;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ProductUpdateTest extends TestCase
