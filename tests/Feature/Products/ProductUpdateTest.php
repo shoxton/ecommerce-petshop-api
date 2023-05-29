@@ -6,7 +6,6 @@ use Tests\TestCase;
 
 class ProductUpdateTest extends TestCase
 {
-
     use RefreshDatabase;
 
     public function test_a_product_can_be_updated_and_changes_persisted_to_db(): void

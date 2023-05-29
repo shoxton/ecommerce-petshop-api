@@ -3,13 +3,11 @@
 namespace Tests\Feature\Products;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Response;
 use Tests\TestCase;
 
 class ProductDeleteTest extends TestCase
 {
-
     use RefreshDatabase;
 
     public function test_a_product_can_be_deleted(): void
