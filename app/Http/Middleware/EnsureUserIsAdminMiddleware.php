@@ -17,7 +17,7 @@ class EnsureUserIsAdminMiddleware
     {
 
         if(!$request->user() || !$request->user()->is_admin) {
-            return response()->json(['message' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
+            return response()->json(['message' => 'Unauthorized'], Response::HTTP_FORBIDDEN);
         }
 
         return $next($request);
