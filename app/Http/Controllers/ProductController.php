@@ -13,8 +13,8 @@ class ProductController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->only(['store']);
-        $this->middleware('admin')->only(['store']);
+        $this->middleware('auth')->only(['store', 'update']);
+        $this->middleware('admin')->only(['store', 'update']);
     }
 
     /**
