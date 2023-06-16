@@ -9,6 +9,7 @@ use App\Http\Resources\UserWithTokenResource;
 use App\Models\User;
 use App\Services\JwtService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 
 /**
@@ -255,7 +256,7 @@ class UserController extends Controller
 
         if (!$user || !Hash::check($request->input('password'), $user->password)) {
 
-            return response()->json(['error' => 'Invalid credentials.']);
+            return response()->json(['error' => 'Invalid credentials.'], Response::HTTP_UNAUTHORIZED);
         }
 
         $token = $jwtService->getToken($user->uuid);
