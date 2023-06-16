@@ -53,4 +53,24 @@ class StoreUserTest extends TestCase
         $response = $this->postJson(route('user.store'), $userData)
             ->assertJsonValidationErrorFor('email');
     }
+
+    public function test_user_can_be_created_with_minimal_info(): void
+    {
+
+        $userData = [
+            'first_name' => 'John',
+            'last_name' => 'Doe',
+            'email' => 'johndoe@example.com',
+            'password' => 'johndoe1234',
+            'password_confirmation' => 'johndoe1234'
+        ];
+
+        $this->postJson(route('user.store'), $userData)
+            ->assertCreated();
+
+        $this->assertDatabaseHas('users', [
+            'email' => 'johndoe@example.com'
+        ]);
+
+    }
 }
